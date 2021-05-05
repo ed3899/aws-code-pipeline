@@ -2,6 +2,7 @@ import * as cdk from "@aws-cdk/core";
 import * as codecommit from "@aws-cdk/aws-codecommit";
 import * as codepipeline from "@aws-cdk/aws-codepipeline";
 import * as codepipeline_actions from "@aws-cdk/aws-codepipeline-actions";
+import { WorkshopPipelineStage } from "./pipeline-stage";
 import { SimpleSynthAction, CdkPipeline } from "@aws-cdk/pipelines";
 
 export class WorkshopPipelineStack extends cdk.Stack {
@@ -23,7 +24,7 @@ export class WorkshopPipelineStack extends cdk.Stack {
     // The basic pipeline declaration. This sets the initial structure
     // of our pipeline
 
-    new CdkPipeline(this, "Pipeline", {
+    const pipeline = new CdkPipeline(this, "Pipeline", {
       pipelineName: "WorkshopPipeline",
       cloudAssemblyArtifact,
 
@@ -42,5 +43,9 @@ export class WorkshopPipelineStack extends cdk.Stack {
         buildCommand: "npm run build",
       }),
     });
+
+    const deploy = new WorkshopPipelineStage(this, "Deploy");
+
+    pipeline.addApplicationStage(deploy);
   }
 }
