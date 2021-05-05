@@ -14,32 +14,33 @@ export class WorkshopPipelineStack extends cdk.Stack {
       description: "Some description",
     });
 
-    //Defines the artifact representing the source code
-    const sourceArtifact = new codepipeline.Artifact();
-    // Defines the artifact representing the cloud assembly
-    // (cloudformation template + all other assets)
-    const cloudAssemblyArtifact = new codepipeline.Artifact();
+    // //Defines the artifact representing the source code
+    // const sourceArtifact = new codepipeline.Artifact();
+    // // Defines the artifact representing the cloud assembly
+    // // (cloudformation template + all other assets)
+    // const cloudAssemblyArtifact = new codepipeline.Artifact();
 
-    // The basic pipeline declaration. This sets the initial structure
-    // of our pipeline
+    // // The basic pipeline declaration. This sets the initial structure
+    // // of our pipeline
 
-    new CdkPipeline(this, "Pipeline", {
-      pipelineName: "WorkshopPipeline",
-      cloudAssemblyArtifact,
+    // new CdkPipeline(this, "Pipeline", {
+    //   pipelineName: "WorkshopPipeline",
+    //   cloudAssemblyArtifact,
 
-      // Generates the source artifact from the repo we created in the last step
-      sourceAction: new codepipeline_actions.CodeCommitSourceAction({
-        actionName: "CodeCommit", // Any Git-based source control
-        repository: repo, // Designates the repo to draw code from
-        output: sourceArtifact, // Indicates where the artifact is stored
-      }),
+    //   // Generates the source artifact from the repo we created in the last step
+    //   sourceAction: new codepipeline_actions.CodeCommitSourceAction({
+    //     actionName: "CodeCommit", // Any Git-based source control
+    //     repository: repo, // Designates the repo to draw code from
+    //     branch: "main",
+    //     output: sourceArtifact, // Indicates where the artifact is stored
+    //   }),
 
-      // Builds our source code outlined above into a could assembly artifact
-      synthAction: SimpleSynthAction.standardNpmSynth({
-        sourceArtifact, // Where to get source code to build
-        cloudAssemblyArtifact, // Where to place built source
-        buildCommand: "npm run build",
-      }),
-    });
+    //   // Builds our source code outlined above into a could assembly artifact
+    //   synthAction: SimpleSynthAction.standardNpmSynth({
+    //     sourceArtifact, // Where to get source code to build
+    //     cloudAssemblyArtifact, // Where to place built source
+    //     buildCommand: "npm run build",
+    //   }),
+    // });
   }
 }
