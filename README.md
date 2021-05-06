@@ -12,3 +12,10 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
  * `cdk deploy`      deploy this stack to your default AWS account/region
  * `cdk diff`        compare deployed stack with current state
  * `cdk synth`       emits the synthesized CloudFormation template
+
+# NOTE
+
+This project will only work if you cover the prerequisites of AWS:
+- Have an AWS Account
+- Have the AWS CLI installed and properly configured
+- If using VSCode, having AWS Toolkit installed (optional)
